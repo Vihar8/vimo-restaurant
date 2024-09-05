@@ -1,76 +1,117 @@
 'use client'
-import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
-import axios from "axios";
 
-export default function Component() {
-  const [formData, setFormData] = useState({
-    name: '',
-    age: '',
-    work: 'Chef', // Default value
-    mobile: '',
-    email: '',
-    salary: ''
-  })
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log(formData)
-    try {
-      const response = await axios.post('https://hotels-27n7.onrender.com/person', formData);
-      return response;
-    } catch (err) {
-      console.log("Error", err);
-    }
-  }
+export default function HomePage() {
+  const router = useRouter()
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle>Employee Information</CardTitle>
-        <CardDescription>Please fill in the employee details</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" name="name" value={formData.name} onChange={handleChange} required />
+    // <div className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: 'url(/images/restaurant-bg.jpg)' }}>
+    //   <div className="bg-white bg-opacity-70 p-10 rounded-lg shadow-lg text-center">
+    //     <h1 className="text-5xl font-extrabold mb-8 text-gray-800">Welcome to Vimo Restaurant</h1>
+    //     <p className="text-lg text-gray-600 mb-8">Manage your restaurant with ease. Add new staff or update the menu effortlessly.</p>
+    //     <div className="space-y-4">
+    //       <Button
+    //         className="w-64 py-4 text-lg bg-blue-600 hover:bg-blue-700 text-white transition duration-300"
+    //         onClick={() => router.push('/person')}
+    //       >
+    //         Add New Person
+    //       </Button>
+    //       <Button
+    //         className="w-64 py-4 text-lg bg-green-600 hover:bg-green-700 text-white transition duration-300"
+    //         onClick={() => router.push('/menu')}
+    //       >
+    //         Add New Menu
+    //       </Button>
+    //     </div>
+    //   </div>
+    // </div>
+
+    <div>
+    {/* Navbar */}
+    <nav className="bg-white shadow-md sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex-shrink-0">
+            <a href="/">
+              <img className="h-8 w-auto" src="/logo.png" alt="Vimo" />
+            </a>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="age">Age</Label>
-            <Input id="age" name="age" type="number" value={formData.age} onChange={handleChange} required min="18" max="100" />
+          <div className="hidden md:flex space-x-4 items-center">
+            <a href="#home" className="text-gray-700 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+            <a href="#menu" className="text-gray-700 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium">Menu</a>
+            <a href="#about" className="text-gray-700 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium">About</a>
+            <a href="#contact" className="text-gray-700 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="work">Work</Label>
-            <select id="work" name="work" value={formData.work} onChange={handleChange} required className="block w-full p-2 border rounded">
-              <option value="chef">chef</option>
-              <option value="manager">manager</option>
-              <option value="waiter">waiter</option>
-            </select>
+        </div>
+      </div>
+    </nav>
+
+    {/* Hero Section */}
+    <section id="home" className="bg-[url('/restaurant.jpg')] bg-cover bg-center h-screen flex items-center justify-center">
+      <div className="text-center text-black">
+        <h1 className="text-5xl font-bold mb-4">Welcome to Vimo Restaurant</h1>
+        <p className="text-lg mb-8">Taste the Best Culinary Delights</p>
+        <div className="space-y-4 space-x-7">
+           <Button
+           className="w-50 py-4 text-lg bg-blue-600 hover:bg-blue-700 text-white transition duration-300"
+            onClick={() => router.push('/person')}
+          >
+            Add New Person
+          </Button>
+          <Button
+            className="w-50 py-4 text-lg bg-green-600 hover:bg-green-700 text-white transition duration-300"
+            onClick={() => router.push('/menu')}
+          >
+            Add New Menu
+          </Button>
+        </div>
+      </div>
+    </section>
+
+    {/* Features Section */}
+    <section id="menu" className="py-12 bg-gray-100">
+      <div className="max-w-7xl mx-auto text-center">
+        <h2 className="text-3xl font-bold mb-8">Why Choose Vimo?</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-white p-6 shadow-md rounded-lg">
+            <h3 className="text-2xl font-semibold mb-4">Gourmet Dishes</h3>
+            <p>Prepared by top chefs with fresh ingredients.</p>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="mobile">Mobile</Label>
-            <Input id="mobile" name="mobile" type="tel" value={formData.mobile} onChange={handleChange} required pattern="[0-9]{10}" />
+          <div className="bg-white p-6 shadow-md rounded-lg">
+            <h3 className="text-2xl font-semibold mb-4">Cozy Ambiance</h3>
+            <p>Experience a relaxing atmosphere with elegant decor.</p>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required />
+          <div className="bg-white p-6 shadow-md rounded-lg">
+            <h3 className="text-2xl font-semibold mb-4">Exceptional Service</h3>
+            <p>Our staff is dedicated to providing top-notch service.</p>
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="salary">Salary</Label>
-            <Input id="salary" name="salary" type="number" value={formData.salary} onChange={handleChange} required min="0" step="0.01" />
+        </div>
+      </div>
+    </section>
+
+    {/* About Section */}
+    <section id="about" className="py-12">
+      <div className="max-w-7xl mx-auto text-center">
+        <h2 className="text-3xl font-bold mb-8">About Us</h2>
+        <p className="text-lg mb-8">
+          Vimo Restaurant offers a unique dining experience with a blend of traditional and contemporary dishes. Our chefs are passionate about delivering the best flavors, using only the freshest ingredients. Come and enjoy an unforgettable culinary journey at Vimo.
+        </p>
+      </div>
+    </section>
+
+    {/* Footer */}
+    <footer id="contact" className="bg-gray-900 text-white py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center">
+          <p>&copy; 2024 Vimo Restaurant. All rights reserved.</p>
+          <div className="flex space-x-4">
+            <a href="#" className="hover:text-red-500">Privacy Policy</a>
+            <a href="#" className="hover:text-red-500">Terms of Service</a>
           </div>
-          <Button type="submit" className="w-full">Submit</Button>
-        </form>
-      </CardContent>
-    </Card>
+        </div>
+      </div>
+    </footer>
+  </div>
   )
 }
