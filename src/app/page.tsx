@@ -6,35 +6,15 @@ export default function HomePage() {
   const router = useRouter()
 
   return (
-    // <div className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: 'url(/images/restaurant-bg.jpg)' }}>
-    //   <div className="bg-white bg-opacity-70 p-10 rounded-lg shadow-lg text-center">
-    //     <h1 className="text-5xl font-extrabold mb-8 text-gray-800">Welcome to Vimo Restaurant</h1>
-    //     <p className="text-lg text-gray-600 mb-8">Manage your restaurant with ease. Add new staff or update the menu effortlessly.</p>
-    //     <div className="space-y-4">
-    //       <Button
-    //         className="w-64 py-4 text-lg bg-blue-600 hover:bg-blue-700 text-white transition duration-300"
-    //         onClick={() => router.push('/person')}
-    //       >
-    //         Add New Person
-    //       </Button>
-    //       <Button
-    //         className="w-64 py-4 text-lg bg-green-600 hover:bg-green-700 text-white transition duration-300"
-    //         onClick={() => router.push('/menu')}
-    //       >
-    //         Add New Menu
-    //       </Button>
-    //     </div>
-    //   </div>
-    // </div>
 
     <div>
     {/* Navbar */}
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          <div className="flex-shrink-0">
+          <div className="m-2 w-[46px]">
             <a href="/">
-              <img className="h-8 w-auto" src="/logo.png" alt="Vimo" />
+              <img className="" src="/Vimo.png" alt="Vimo" />
             </a>
           </div>
           <div className="hidden md:flex space-x-4 items-center">
@@ -48,8 +28,8 @@ export default function HomePage() {
     </nav>
 
     {/* Hero Section */}
-    <section id="home" className="bg-[url('/restaurant.jpg')] bg-cover bg-center h-screen flex items-center justify-center">
-      <div className="text-center text-black">
+    <section id="home" className="bg-[url('/vimo.png')] bg-cover bg-center h-screen flex items-center justify-center">
+      <div className="text-center text-white backdrop-blur-lg">
         <h1 className="text-5xl font-bold mb-4">Welcome to Vimo Restaurant</h1>
         <p className="text-lg mb-8">Taste the Best Culinary Delights</p>
         <div className="space-y-4 space-x-7">
