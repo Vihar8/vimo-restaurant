@@ -70,15 +70,15 @@ export default function Component() {
         <div className="space-y-2">
           <Label htmlFor="taste">Taste</Label>
           <Select onValueChange={handleTasteChange}>
-            <SelectTrigger id="taste">
-              <SelectValue placeholder="Select taste" value={formData.taste} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="sweet">Sweet</SelectItem>
-              <SelectItem value="spicy">Spicy</SelectItem>
-              <SelectItem value="sour">Sour</SelectItem>
-            </SelectContent>
-          </Select>
+  <SelectTrigger id="taste">
+    <SelectValue placeholder="Select taste" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="sweet">Sweet</SelectItem>
+    <SelectItem value="spicy">Spicy</SelectItem>
+    <SelectItem value="sour">Sour</SelectItem>
+  </SelectContent>
+</Select>
         </div>
 
         <div className="flex items-center space-x-2">
