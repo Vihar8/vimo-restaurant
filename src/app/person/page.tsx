@@ -10,11 +10,13 @@ export default function Component() {
   const [formData, setFormData] = useState({
     name: '',
     age: '',
-    work: 'Chef', // Default value
+    work: 'chef', // Default value
     mobile: '',
     email: '',
     salary: ''
   })
+
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -26,6 +28,8 @@ export default function Component() {
     console.log(formData)
     try {
       const response = await axios.post('https://hotels-27n7.onrender.com/person', formData);
+      setShowPopup(true); // Show the pop-up on successful submission
+      setTimeout(() => setShowPopup(false), 3000); // Hide the pop-up after 3 seconds
       return response;
     } catch (err) {
       console.log("Error", err);
@@ -33,44 +37,53 @@ export default function Component() {
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle>Employee Information</CardTitle>
-        <CardDescription>Please fill in the employee details</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" name="name" value={formData.name} onChange={handleChange} required />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="age">Age</Label>
-            <Input id="age" name="age" type="number" value={formData.age} onChange={handleChange} required min="18" max="100" />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="work">Work</Label>
-            <select id="work" name="work" value={formData.work} onChange={handleChange} required className="block w-full p-2 border rounded">
-              <option value="chef">chef</option>
-              <option value="manager">manager</option>
-              <option value="waiter">waiter</option>
-            </select>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="mobile">Mobile</Label>
-            <Input id="mobile" name="mobile" type="tel" value={formData.mobile} onChange={handleChange} required pattern="[0-9]{10}" />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="salary">Salary</Label>
-            <Input id="salary" name="salary" type="number" value={formData.salary} onChange={handleChange} required min="0" step="0.01" />
-          </div>
-          <Button type="submit" className="w-full">Submit</Button>
-        </form>
-      </CardContent>
-    </Card>
+    <div className="relative w-full max-w-md mx-auto">
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>Employee Information</CardTitle>
+          <CardDescription>Please fill in the employee details</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name">Name</Label>
+              <Input id="name" name="name" value={formData.name} onChange={handleChange} required />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="age">Age</Label>
+              <Input id="age" name="age" type="number" value={formData.age} onChange={handleChange} required min="18" max="100" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="work">Work</Label>
+              <select id="work" name="work" value={formData.work} onChange={handleChange} required className="block w-full p-2 border rounded">
+                <option value="chef">Chef</option>
+                <option value="manager">Manager</option>
+                <option value="waiter">Waiter</option>
+              </select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="mobile">Mobile</Label>
+              <Input id="mobile" name="mobile" type="tel" value={formData.mobile} onChange={handleChange} required pattern="[0-9]{10}" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="salary">Salary</Label>
+              <Input id="salary" name="salary" type="number" value={formData.salary} onChange={handleChange} required min="0" step="0.01" />
+            </div>
+            <Button type="submit" className="w-full">Submit</Button>
+          </form>
+        </CardContent>
+      </Card>
+
+      {/* Pop-up Notification */}
+      {showPopup && (
+        <div className="absolute top-0 right-0 bg-green-500 text-white p-4 rounded shadow-md">
+          Your input has been submitted!
+        </div>
+      )}
+    </div>
   )
 }
