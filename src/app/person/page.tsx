@@ -1,10 +1,21 @@
-'use client'
-import { AwaitedReactNode, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from 'react'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
+'use client';
+import { useEffect, useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import axios from "axios";
+
+// Define the Person interface
+interface Person {
+  id: number;
+  name: string;
+  email: string;
+  work: string;
+  age: number;
+  mobile: string;
+  salary: number;
+}
 
 export default function Component() {
   const [formData, setFormData] = useState({
@@ -14,7 +25,7 @@ export default function Component() {
     mobile: '',
     email: '',
     salary: ''
-  })
+  });
 
   const [showPopup, setShowPopup] = useState(false);
   const [data, setData] = useState<Person[] | null>(null);
@@ -42,13 +53,13 @@ export default function Component() {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log(formData)
+    e.preventDefault();
+    console.log(formData);
     try {
       const response = await axios.post('https://hotels-27n7.onrender.com/person', formData);
       setShowPopup(true); // Show the pop-up on successful submission
@@ -57,7 +68,7 @@ export default function Component() {
     } catch (err) {
       console.log("Error", err);
     }
-  }
+  };
 
   return (
     <div className="relative w-full max-w-md mx-auto">
@@ -102,14 +113,13 @@ export default function Component() {
       </Card>
 
       <div className="mt-5">
-      <h1 className="text-2xl bg-green-400 rounded-md">employee Data</h1>
-      <ul>
-        {data.map(person => (
-          <li key={person.id}>{person.name} - {person.email}  - {person.work}</li>
-
-        ))}
-      </ul>
-    </div>
+        <h1 className="text-2xl bg-green-400 rounded-md">Employee Data</h1>
+        <ul>
+          {data.map(person => (
+            <li key={person.id}>{person.name} - {person.email} - {person.work}</li>
+          ))}
+        </ul>
+      </div>
 
       {/* Pop-up Notification */}
       {showPopup && (
@@ -118,5 +128,5 @@ export default function Component() {
         </div>
       )}
     </div>
-  )
+  );
 }
