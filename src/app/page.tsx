@@ -14,7 +14,7 @@ export default function HomePage() {
         <div className="flex justify-between h-16">
           <div className="m-2 w-[46px]">
             <a href="/">
-              <img className="" src="/Vimo.png" alt="Vimo" />
+              <img src="/vimo.png" alt="Vimo" />
             </a>
           </div>
           <div className="hidden md:flex space-x-4 items-center">
