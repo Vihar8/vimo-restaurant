@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { AwaitedReactNode, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -17,6 +17,29 @@ export default function Component() {
   })
 
   const [showPopup, setShowPopup] = useState(false);
+  const [data, setData] = useState<Person[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Fetch data using Axios
+    axios.get('https://hotels-27n7.onrender.com/person')
+      .then(response => {
+        // Handle success
+        setData(response.data);
+      })
+      .catch(error => {
+        // Handle error
+        setError(error.message);
+      });
+  }, []);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -77,6 +100,16 @@ export default function Component() {
           </form>
         </CardContent>
       </Card>
+
+      <div className="mt-5">
+      <h1 className="text-2xl bg-green-400 rounded-md">employee Data</h1>
+      <ul>
+        {data.map(person => (
+          <li key={person.id}>{person.name} - {person.email}  - {person.work}</li>
+
+        ))}
+      </ul>
+    </div>
 
       {/* Pop-up Notification */}
       {showPopup && (
