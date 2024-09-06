@@ -1,0 +1,59 @@
+/* Global styles or component-specific styles */
+.pizza-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f9fa; /* Light background */
+}
+
+.pizza-loading {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #ffdd57, #ffcc33 70%, #cc9933 72%, #b5651d 75%); /* Pizza colors */
+  position: relative;
+  animation: spin 1.5s linear infinite;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pizza-slice {
+  width: 20px;
+  height: 40px;
+  background: #ff5733; /* Sauce color */
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.pizza-cheese {
+  width: 15px;
+  height: 15px;
+  background: #fff;
+  position: absolute;
+  border-radius: 50%;
+  top: 20px;
+  left: 60%;
+}
+
+.pizza-topping {
+  width: 10px;
+  height: 10px;
+  background: #8e44ad; /* Topping color */
+  position: absolute;
+  border-radius: 50%;
+  top: 30px;
+  left: 30%;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

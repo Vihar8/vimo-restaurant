@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import axios from "axios";
+import Loading from '@/components/Loading';
 
 // Define the Person interface
 interface Person {
@@ -49,7 +50,7 @@ export default function Component() {
   }
 
   if (!data) {
-    return <div>Loading...</div>;
+    return <div><Loading /></div>;
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
