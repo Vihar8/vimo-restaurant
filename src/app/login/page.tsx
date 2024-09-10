@@ -21,10 +21,11 @@ function LoginPage() {
     setIsMenuOpen(!isMenuOpen)
   }
 
-  const handleInput = (event) => {
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setLoginData({ ...loginData, [name]: value });
   };
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
