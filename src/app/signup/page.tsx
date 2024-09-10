@@ -22,6 +22,12 @@ function Page() {
 
   const router = useRouter(); // Initialize the router
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+
   const handleInput = (event) => {
     const { name, value } = event.target;
     setPost({ ...post, [name]: value });
@@ -29,7 +35,7 @@ function Page() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('https://hotels-27n7.onrender.com/person/signup', post)
+    axios.post('http://localhost:3000/person/signup', post)
       .then((response) => {
         toast.success('Signup Successful! Redirecting to login...'); // Show success toast
         setTimeout(() => {
@@ -43,6 +49,51 @@ function Page() {
   };
 
   return (
+      <div>
+   <nav className="bg-gradient-to-r from-white/30 via-white/50 to-white/30 backdrop-blur-md shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="m-2 w-[46px]">
+              <a href="/">
+                <img src="/vimo.png" alt="Vimo" />
+              </a>
+            </div>
+
+            {/* Desktop Menu */}
+            <div className="hidden md:flex space-x-4 items-center">
+              <a href="/" className="text-gray-700 hover:text-red-500 relative transition-all duration-200">
+                <span className="pb-1 border-b-2 border-transparent hover:border-red-500">Home</span>
+              </a>
+              {/* Login and Signup Buttons */}
+              
+              <Button
+                className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md"
+                onClick={() => router.push('/login')}
+              >
+                Signup
+              </Button>
+            </div>
+
+            {/* Mobile Menu */}
+            <div className="md:hidden flex items-center">
+              <button onClick={toggleMenu} className="text-gray-700 focus:outline-none">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Menu Links */}
+          {isMenuOpen && (
+            <div className="md:hidden">
+              <a href="/" className="block text-gray-700 hover:text-red-500 px-4 py-2">Home</a>
+              {/* Login and Signup Links for Mobile */}
+              <a href="/login" className="block text-gray-700 hover:text-red-500 px-4 py-2">login</a>
+            </div>
+          )}
+        </div>
+      </nav>
     <div className="relative w-full max-w-lg mx-auto p-6 space-y-8">
       <Card className="shadow-lg">
         <CardHeader className="bg-green-100">
@@ -100,6 +151,7 @@ function Page() {
           </form>
         </CardContent>
       </Card>
+    </div>
     </div>
   );
 }
