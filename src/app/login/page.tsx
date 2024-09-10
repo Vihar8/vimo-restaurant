@@ -27,7 +27,7 @@ function LoginPage() {
   };
   
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     axios.post('https://hotels-27n7.onrender.com/person/login', loginData) // Replace with your login API
       .then((response) => {
@@ -47,7 +47,7 @@ function LoginPage() {
         console.log(err);
       });
   };
-
+  
   return (
     <div>
    <nav className="bg-gradient-to-r from-white/30 via-white/50 to-white/30 backdrop-blur-md shadow-md sticky top-0 z-50 transition-all duration-300">
