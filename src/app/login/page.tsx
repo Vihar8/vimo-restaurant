@@ -29,7 +29,7 @@ function LoginPage() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    axios.post('https://hotels-27n7.onrender.com/person/login', loginData) // Replace with your login API
+    axios.post('https://hotels-gamp.onrender.com/person/login', loginData) // Replace with your login API
       .then((response) => {
         // Assuming the backend sends a token on successful login
         if (response.data.token) {

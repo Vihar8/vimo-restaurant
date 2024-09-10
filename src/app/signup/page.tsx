@@ -36,7 +36,7 @@ function Page() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    axios.post('https://hotels-27n7.onrender.com/person/signup', post)
+    axios.post('https://hotels-gamp.onrender.com/person/signup', post)
       .then((response) => {
         toast.success('Signup Successful! Redirecting to login...'); // Show success toast
         setTimeout(() => {

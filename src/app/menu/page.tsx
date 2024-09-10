@@ -34,7 +34,7 @@ export default function Component() {
 
   useEffect(() => {
     // Fetch menu items using Axios
-    axios.get('https://hotels-27n7.onrender.com/menu')
+    axios.get('https://hotels-gamp.onrender.com/menu')
       .then(response => setMenuItems(response.data))
       .catch(error => setError(error.message));
   }, []);
@@ -51,7 +51,7 @@ export default function Component() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://hotels-27n7.onrender.com/menu', formData);
+      const response = await axios.post('https://hotels-gamp.onrender.com/menu', formData);
       console.log('Form submitted successfully', response);
       setMenuItems(prevMenuItems => prevMenuItems ? [...prevMenuItems, response.data] : [response.data]); // Update UI with new item
     } catch (err) {
