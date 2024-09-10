@@ -28,12 +28,13 @@ function Page() {
     setIsMenuOpen(!isMenuOpen)
   }
 
-  const handleInput = (event) => {
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     setPost({ ...post, [name]: value });
   };
+  
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     axios.post('https://hotels-27n7.onrender.com/person/signup', post)
       .then((response) => {
